@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ArticleRepository">
+
+    <!-- resultMap 정의 -->
+    <resultMap id="ArticleResultMap"
+               type="com.example.demo.vo.Article">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="body" column="body"/>
+        <result property="regDate" column="regDate"/>
+        <result property="updateDate" column="updateDate"/>
+        <result property="memberId" column="memberId"/>
+        <result property="boardId" column="boardId"/>
+        <result property="extra__writer" column="extra__writer"/>
+        <!-- 필요한 다른 필드들 추가 -->
+    </resultMap>
+
+    <update id="modifyArticle">
+        UPDATE article
+        <set>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="body != null and body != ''">`body` = #{body},</if>
+            updateDate = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <insert id="writeArticle">
+        INSERT INTO article
+        SET regDate = NOW(),
+        updateDate =
+        NOW(),
+        title = #{title},
+        `body` = #{body},
+        memberId = #{memberId},
+        boardId = #{boardId}
+    </insert>
+
+    <select id="getArticles" resultMap="ArticleResultMap">
+        SELECT a.*, m.nickname AS
+        extra__writer
+        FROM article a
+        INNER JOIN `member` m ON a.memberId = m.id
+        ORDER BY a.id DESC
+    </select>
+
+    <select id="getArticleById" resultType="Article">
+        SELECT a.*
+        FROM article a
+        WHERE id = #{id}
+    </select>
+
+    <!-- 페이지네이션 -->
+    <select id="getArticlesByPage" resultMap="ArticleResultMap">
+        SELECT a.*, m.nickname
+        AS extra__writer
+        FROM article a
+        INNER JOIN `member` m ON a.memberId =
+        m.id
+        WHERE a.boardId = #{boardId}
+        ORDER BY a.id DESC
+        LIMIT #{limit}
+        OFFSET #{offset}
+    </select>
+
+    <select id="getTotalArticlesCount" resultType="int">
+        SELECT COUNT(*)
+        FROM article
+        WHERE boardId = #{boardId}
+    </select>
+
+
+</mapper>

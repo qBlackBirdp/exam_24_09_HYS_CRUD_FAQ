@@ -1,0 +1,24 @@
+server:
+  port: 8085
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    #    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/24_08_Spring?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://127.0.0.1:3306/24_08_Spring?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+mybatis:
+  type-aliases-package: com.example.demo.vo
+
+# 로그 레벨 설정 추가
+logging:
+  level:
+    root: info        # 전체 로그 레벨을 INFO로 설정
+    com.example.exam: debug   # com.example.exam 패키지에 대해 DEBUG 레벨 설정
+    org.mybatis: debug    # MyBatis SQL 로그를 출력
+    org.springframework.jdbc.core.JdbcTemplate: debug   # Spring의 JDBC 관련 로그 출력
