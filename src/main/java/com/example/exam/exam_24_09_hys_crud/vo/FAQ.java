@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class FAQ {
     private String question;
     private String answer;
+    private int views;
 }

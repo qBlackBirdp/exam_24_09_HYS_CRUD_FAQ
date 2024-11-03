@@ -40,4 +40,8 @@ public interface FAQRepository {
     List<FAQ> getFAQsForPage(@Param("offset") int offset,
                              @Param("itemsInAPage") int itemsInAPage,
                              @Param("keyword") String keyword);
+
+    // 조회수 기준 상위 5개 FAQ 가져오기
+    @Select("SELECT * FROM faq ORDER BY views DESC LIMIT 5")
+    List<FAQ> getTop5FAQs();
 }

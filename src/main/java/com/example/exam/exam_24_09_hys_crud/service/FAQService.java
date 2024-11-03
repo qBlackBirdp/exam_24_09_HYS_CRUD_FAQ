@@ -35,4 +35,9 @@ public class FAQService {
 
         return faqRepository.getFAQsForPage(offset, itemsInAPage, keyword);
     }
+
+    // 조회수 상위 5개 FAQ 가져오기
+    public List<FAQ> getTop5FAQs() {
+        return faqRepository.getTop5FAQs();
+    }
 }

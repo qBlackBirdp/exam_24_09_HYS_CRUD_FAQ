@@ -21,6 +21,28 @@
     </form>
 </div>
 
+
+<!-- Top 5 FAQ 목록 -->
+<div class="section top5-section">
+    <h3>자주 묻는 질문</h3>
+    <table id="top5-faq-table" class="article-table">
+        <thead>
+        <tr>
+            <th>질문</th>
+            <th>답변</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="faq" items="${top5Faqs}">
+            <tr>
+                <td>${faq.question}</td>
+                <td>${faq.answer}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+
 <!-- FAQ 목록 테이블 -->
 <div>
     <!-- 검색어가 있을 경우 메시지 출력 -->

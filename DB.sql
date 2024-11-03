@@ -434,6 +434,15 @@ VALUES
     ('상품 리뷰는 어떻게 작성하나요?', '구매 완료 후 상품 상세 페이지에서 리뷰를 작성할 수 있습니다.'),
     ('리뷰 작성 시 포인트는 어떻게 받나요?', '리뷰 작성 후 검토가 완료되면 포인트가 적립됩니다.'),
     ('주문 취소 시 환불은 얼마나 걸리나요?', '환불 처리는 취소 요청 후 3~5일 이내에 완료됩니다.');
+ALTER TABLE faq
+    ADD COLUMN views INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '조회수';
+
+UPDATE faq SET views = 100 WHERE id = 61;
+UPDATE faq SET views = 80 WHERE id = 58;
+UPDATE faq SET views = 70 WHERE id = 57;
+UPDATE faq SET views = 50 WHERE id = 53;
+UPDATE faq SET views = 40 WHERE id = 52;
+
 
 ###(INIT 끝)
 ##########################################

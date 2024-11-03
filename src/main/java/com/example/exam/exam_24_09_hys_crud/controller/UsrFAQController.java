@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -79,12 +80,17 @@ public class UsrFAQController {
         List<FAQ> faqs = faqService.getFAQsForPage(offset, itemsInAPage, keyword);
         log.info("FAQs for Current Page: {}", faqs.size());
 
+        // 상위 5개의 FAQ 가져오기
+        List<FAQ> top5Faqs = faqService.getTop5FAQs();
+
         model.addAttribute("faqs", faqs);
         model.addAttribute("faqsCount", faqsCount);
         model.addAttribute("pagesCount", pagesCount);
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword); // 검색어를 JSP로 전달
         model.addAttribute("itemsInAPage", itemsInAPage); // JSP에서 페이지 항목 수 확인 가능하도록 전달
+        model.addAttribute("top5Faqs", top5Faqs); // 상위 5개 FAQ 데이터 추가
+
 
         log.info("Service - Offset: {}", offset);
         log.info("Service - Items per Page: {}", itemsInAPage);
